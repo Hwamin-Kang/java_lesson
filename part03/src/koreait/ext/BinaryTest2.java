@@ -36,6 +36,7 @@ public class BinaryTest2 {
 		System.out.println(String.format("2진수 %s는 10진수 %d이다.", t2, Integer.parseInt(t2, 2))); //t2는 2진수, 결과는 정수값
 		System.out.println(String.format("16진수 %s는 10진수 %d이다.", t16, Integer.parseInt(t16, 16))); //t16은 16진수, 결과는 정수값
 		//음수는 -기호 써서 절대값 넘지 않는 범위에서 문자열 입력
+		sc.close();
 	}
 	/*
 	 * 요약
