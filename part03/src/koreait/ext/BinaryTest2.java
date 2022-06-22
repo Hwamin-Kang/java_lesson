@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class BinaryTest2 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {//바이네리 브랜치다
 		int n10 = 123;
 		int n16 = 0xa41c; //16진수 표기, 0x
 		int n2 = 0b1010010000011100; //2진수 표기, 0b
