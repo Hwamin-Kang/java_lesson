@@ -27,7 +27,7 @@ class AdvancedPrint implements Printable{
 public class InterfaceApp {
 
 	public static void main(String[] args) {
-		Printable c = new AdvancedPrint();
+		Printable c = new AdvancedPrint(); 
 		c.print();
 	}
 

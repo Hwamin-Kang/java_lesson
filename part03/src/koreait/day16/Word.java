@@ -15,7 +15,7 @@ public class Word {
 	@Override
 	public String toString() {
 		return engilsh + " " + korean + " " + level + 
-				(this.level == BASIC?"기초" : this.level == PREATICAL?"활용":"전문가" + ")");
+				(this.level == BASIC ? "기초" : this.level == PREATICAL ? "활용" : "전문가" + ")");
 	}
 
 	public Word() {

@@ -8,61 +8,61 @@ import java.util.Scanner;
 public class MyDictionary {
 	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in); // 키보드 입력시 nextLine() 과 nextInt() 등을 같이 쓰면 입력이 정상 실행 안됩니다.
-		List<Word> myword = new ArrayList<>(); // **mydic을 myword로 바꿔서 구현해보기**
+		Scanner sc = new Scanner(System.in);
+		ArrayList<Word> myword = new ArrayList<>(); //객체의 data type(자료형)은 Word
 		String sel, eng, kor;
 		int level;
-		System.out.println("선택 기능 👉   1. 단어저장     2. 단어검색     3. 전체보기  4. 레벨로 검색   5.프로그램 끝내기");
 		boolean run = true;
-		while (run) { // while 반복안에 switch 로 종료조건을 동작시킬때 break 로 못합니다.-> 변수 사용했습니다.
-			System.out.print("선택 ✏->");
+		
+		System.out.println("선택기능 : 1.단어저장   2.단어검색   3.전체보기   4.Level 검색   5.프로그램 끝내기");
+		while (run) {
+			System.out.print("선택(번호입력) : ");
 			sel = sc.nextLine();
 			switch (sel) {
-			case "1": // switch문에서 case "문자열" 형식 가능. if문에서는 sel.equals("1") 로 해야합니다.
-				System.out.print("English -> ");
-				eng = sc.nextLine(); // sc.nextInt();
-				System.out.print("한글 뜻 -> ");
+			case "1":
+				System.out.print("English : ");
+				eng = sc.nextLine();
+				System.out.print("Korean : ");
 				kor = sc.nextLine();
-				System.out.println("레벨 -> ");
+				System.out.print("Level(1 ~ 3) : ");
 				level = Integer.parseInt(sc.nextLine());
-				Word temp = new Word(eng,kor);
-				temp.setLevel(level);
-				myword.add(temp); // 저장
+				Word temp = new Word(eng, kor, level); //Word의 생성자는 세개의 인자를 받아 대입.
+				myword.add(temp); //ArrayList myword에 temp 대입
 				break;
 			case "2":
-				System.out.print("검색 단어 English -> ");
+				System.out.print("English : ");
 				eng = sc.nextLine();
-				for(Word w : myword)
+				for(Word w : myword) //ArrayList myword를 전부 검색
 					if(w.getEnglish().equals(eng))
-						System.out.println("단어장 검색했습니다. 결과 =>" + w);
-//					for(int i= 0;i<myword.size();i++)
-//						if(myword.get(i).getEngilsh().equals(eng))
-//							System.out.println("검색결과 -> " + myword.get(i));
+						System.out.println("검색완료, 결과 : " + w);
+//					for(int i= 0;i<myword.size();i++){
+//						if(myword.get(i).getEngilsh().equals(eng)){
+//							System.out.println("검색결과 : " + myword.get(i));
+//						}
+//					}
 				break;
 			case "3":
-//					System.out.println("단어장 전체보기 :" + myword);
-				all(myword);	// 정렬하고 출력하기
+//				System.out.println("단어장 전체보기 :" + myword);
+				all(myword);	//all 메소드, 정렬하고 출력하기
 				break;
-			
 			case "4":
-				System.out.println("검색할 레벨입력(1~3) -> ");
+				System.out.println("검색할 레벨입력(1~3) : ");
 				int no = Integer.parseInt(sc.nextLine());
-				level(myword,no);
+				level(myword, no); //level 메소드, myword 리스트의 입력된 레벨의 단어를 찾아서 출력
 				break;
 			case "5":
-				run = false;
+				run = false; //while문 빠져나가기 위해 false 대입
 				break;
 			default:
-				System.out.println("👁‍🗨잘못 입력된 선택입니다.1~4 입력입니다.");
+				System.out.println("‍잘못된 입력입니다. 1~5 중 선택하십시오.");
 				break;
 			}
 		} // while end
-		System.out.println("::::  너의 단어장 종료합니다. ::::");
+		System.out.println(":::: 단어장 종료 ::::");
 	}
 
-	private static void level(List<Word> myword, int no) {
-		
-		for(Word w :myword)
+	private static void level(ArrayList<Word> myword, int no) { //ArrayList와 level을 인자로 입력받아 입력한 레벨의 단어 출력
+		for(Word w : myword)
 			if(w.getLevel() == no)
 				System.out.println(w);
 //			for(int i =0; i<myword.size();i++)
@@ -70,15 +70,13 @@ public class MyDictionary {
 //					System.out.println(myword.get(i));
 	}
 
-	private static void all(List<Word> myword) {	//myword 의 참조값 전달받아 동일한 객체를 기리킵니다.
+	private static void all(List<Word> myword) {	//사전식으로 정렬한 뒤 입력한 모든 단어 출력, myword 의 참조값 전달받아 동일한 객체를 가리킨다.
 		myword.sort(new Comparator<Word>() {
-	
-			
 			public int compare(Word o1, Word o2) {
 				return o1.getEnglish().compareTo(o2.getEnglish());
 			}
 		});
-	System.out.println(String.format("%-20s %-20s\t %10s" , "English","Korean","Level"));
+	System.out.println(String.format("%-20s %-20s %10s" , "English", "Korean", "Level"));
 		for(Word w : myword) {
 			System.out.println(String.format("%-20s %-20s %10d" , w.getEnglish(),w.getKorean(),w.getLevel()));
 		}
